@@ -12,15 +12,24 @@ class XtoyCommand(sublime_plugin.TextCommand):
 
 	def replace(self, content):
 		patterns = {
-			"WIDTH"  :"HEIGHT",
-			"HEIGHT" :"WIDTH",
-			"X"      :"Y",
-			"Y"      :"X",
-			"width"  :"height",
-			"Width"  :"Height",
-			"Height" :"Width",
-			"x"      :"y",
-			"y"      :"x"
+			"WIDTH"  	:"HEIGHT",
+			"HEIGHT" 	:"WIDTH",
+			"X"      	:"Y",
+			"Y"      	:"X",
+			"width"  	:"height",
+			"Width"  	:"Height",
+			"Height" 	:"Width",
+			"x"      	:"y",
+			"y"      	:"x",
+			"-left"		:"-right",
+			"-right"	:"-left",
+			"-top"		:"-bottom",
+			"-bottom"	:"-top",
+			"left"		:"right",
+			"right"		:"left",
+			"top"		:"bottom",
+			"bottom"	:"top"
 		}
 		regex = re.compile("|".join(map(re.escape, patterns.keys())))
+
 		return regex.sub(lambda match: patterns[match.group(0)], content)
