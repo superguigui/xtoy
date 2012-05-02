@@ -12,15 +12,32 @@ class XtoyCommand(sublime_plugin.TextCommand):
 
 	def replace(self, content):
 		patterns = {
-			"WIDTH"  :"HEIGHT",
-			"HEIGHT" :"WIDTH",
-			"X"      :"Y",
-			"Y"      :"X",
-			"width"  :"height",
-			"Width"  :"Height",
-			"Height" :"Width",
-			"x"      :"y",
-			"y"      :"x"
+			"WIDTH"  	:"HEIGHT",
+			"HEIGHT" 	:"WIDTH",
+			"X"      	:"Y",
+			"Y"      	:"X",
+			"width"  	:"height",
+			"Width"  	:"Height",
+			"Height" 	:"Width",
+			"x"      	:"y",
+			"y"      	:"x",
+			"-left"		:"-right",
+			"-right"	:"-left",
+			"-top"		:"-bottom",
+			"-bottom"	:"-top",
+			"left"		:"right",
+			"right"		:"left",
+			"top"		:"bottom",
+			"bottom"	:"top"
 		}
+
+		ignoredSyntaxRegex = re.compile("(.*)[\d][p][x](.*)")
+
+		# I don't know why it's not working with ignoredSyntaxRegex.match(content) each time it returns None...
+		# That's why I'm using findall.
+		if len(ignoredSyntaxRegex.findall(content)) > 0:
+			del patterns['x']
+
 		regex = re.compile("|".join(map(re.escape, patterns.keys())))
+
 		return regex.sub(lambda match: patterns[match.group(0)], content)
