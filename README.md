@@ -6,7 +6,8 @@ sublime-text 2 package to duplicate lines while replacing x by y, width by heigh
 ### Usage: ###
 press Ctrl+alt+d to XtoY duplicate your current line
 
-### Features ###
+## Features ###
+```
 x 		-> y
 y 		-> x
 width	-> height
@@ -15,4 +16,4 @@ top		-> bottom
 bottom	-> top
 left	-> right
 right	-> left 
-
+```
